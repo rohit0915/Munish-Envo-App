@@ -113,6 +113,21 @@ class AuthRepo {
     }
   }
 
+  updateUserDetailsApi(
+      {required String email,
+      required String name,
+      required String profileImagePath}) async {
+    CommonLoader.showLoading();
+    try {
+      String imageUrl = await ImageRepo().upload(imagePath: profileImagePath);
+      var data = {"email": email, "name": name, "profileImage": imageUrl};
+      Response r = await ApiClient().dio.put("/users", data: data);
+      CommonLoader.showSuccessDialog(description: "Details Updated Succesfully");
+    } on Exception catch (e) {
+      CommonLoader.showErrorDialog(description: e.toString());
+    }
+  }
+
   _saveToken(String token) {
     GetStorage box = GetStorage();
     box.write("token", token);

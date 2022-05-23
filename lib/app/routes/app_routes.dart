@@ -17,13 +17,15 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ACCOUNT = _Paths.ACCOUNT;
   static const CANCEL_REQUEST = _Paths.CANCEL_REQUEST;
-  static const MATCHING_RIDER = _Paths.MATCHING_RIDER;  
+  static const MATCHING_RIDER = _Paths.MATCHING_RIDER;
   static const REFER_EARN = _Paths.REFER_EARN;
   static const HELP_SUPPORT = _Paths.HELP_SUPPORT;
   static const MY_VEHICLE = _Paths.MY_VEHICLE;
   static const ADD_VEHICLE = _Paths.ADD_VEHICLE;
   static const PAYMENT = _Paths.PAYMENT;
   static const LOCATION_PICKER = _Paths.LOCATION_PICKER;
+  static const MANAGE_PROFILE = _Paths.MANAGE_PROFILE;
+  static const PROFILE_VERIFICATION = _Paths.PROFILE_VERIFICATION;
 }
 
 abstract class _Paths {
@@ -40,11 +42,13 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ACCOUNT = '/account';
   static const CANCEL_REQUEST = '/cancel-request';
-  static const MATCHING_RIDER = '/matching-rider';  
+  static const MATCHING_RIDER = '/matching-rider';
   static const REFER_EARN = '/refer-earn';
   static const HELP_SUPPORT = '/help-support';
   static const MY_VEHICLE = '/my-vehicle';
   static const ADD_VEHICLE = '/add-vehicle';
   static const PAYMENT = '/payment';
   static const LOCATION_PICKER = '/location-picker';
+  static const MANAGE_PROFILE = '/manage-profile';
+  static const PROFILE_VERIFICATION = '/profile-verification';
 }

@@ -158,26 +158,7 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 height: 3.h,
               ),
-              Row(
-                children: [
-                  Spacer(),
-                  Image.network(
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png",
-                    height: 10.h,
-                  ),
-                  Spacer(),
-                  Image.network(
-                    "https://image.similarpng.com/very-thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png",
-                    height: 7.h,
-                  ),
-                  Spacer(),
-                  Image.network(
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/800px-2021_Facebook_icon.svg.png",
-                    height: 7.h,
-                  ),
-                  Spacer()
-                ],
-              )
+             
             ],
           ),
         ),

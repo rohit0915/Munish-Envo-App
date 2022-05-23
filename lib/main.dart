@@ -1,3 +1,4 @@
+import 'package:envo_safe/app/widget/app%20color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,6 +24,12 @@ class MyApp extends StatelessWidget {
         title: "Application",
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
+        theme: ThemeData(
+          primaryColor: appBarColor,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.orange,
+          ),
+        ),
       );
     }));
   }

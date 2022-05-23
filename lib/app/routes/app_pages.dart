@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:envo_safe/app/modules/account/bindings/account_binding.dart';
 import 'package:envo_safe/app/modules/account/views/account_view.dart';
@@ -22,6 +23,8 @@ import 'package:envo_safe/app/modules/location_picker/bindings/location_picker_b
 import 'package:envo_safe/app/modules/location_picker/views/location_picker_view.dart';
 import 'package:envo_safe/app/modules/login/bindings/login_binding.dart';
 import 'package:envo_safe/app/modules/login/views/login_view.dart';
+import 'package:envo_safe/app/modules/manage_profile/bindings/manage_profile_binding.dart';
+import 'package:envo_safe/app/modules/manage_profile/views/manage_profile_view.dart';
 import 'package:envo_safe/app/modules/matching_rider/bindings/matching_rider_binding.dart';
 import 'package:envo_safe/app/modules/matching_rider/views/matching_rider_view.dart';
 import 'package:envo_safe/app/modules/my_vehicle/bindings/my_vehicle_binding.dart';
@@ -30,6 +33,8 @@ import 'package:envo_safe/app/modules/notification/bindings/notification_binding
 import 'package:envo_safe/app/modules/notification/views/notification_view.dart';
 import 'package:envo_safe/app/modules/payment/bindings/payment_binding.dart';
 import 'package:envo_safe/app/modules/payment/views/payment_view.dart';
+import 'package:envo_safe/app/modules/profile_verification/bindings/profile_verification_binding.dart';
+import 'package:envo_safe/app/modules/profile_verification/views/profile_verification_view.dart';
 import 'package:envo_safe/app/modules/refer_earn/bindings/refer_earn_binding.dart';
 import 'package:envo_safe/app/modules/refer_earn/views/refer_earn_view.dart';
 import 'package:envo_safe/app/modules/riders_pledge/bindings/riders_pledge_binding.dart';
@@ -42,7 +47,6 @@ import 'package:envo_safe/app/modules/splash/bindings/splash_binding.dart';
 import 'package:envo_safe/app/modules/splash/views/splash_view.dart';
 import 'package:envo_safe/app/modules/verify/bindings/verify_binding.dart';
 import 'package:envo_safe/app/modules/verify/views/verify_view.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'app_routes.dart';
 
@@ -127,7 +131,6 @@ class AppPages {
       page: () => MatchingRiderView(),
       binding: MatchingRiderBinding(),
     ),
-    
     GetPage(
       name: _Paths.REFER_EARN,
       page: () => ReferEarnView(),
@@ -157,6 +160,16 @@ class AppPages {
       name: _Paths.LOCATION_PICKER,
       page: () => LocationPickerView(),
       binding: LocationPickerBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_PROFILE,
+      page: () => ManageProfileView(),
+      binding: ManageProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_VERIFICATION,
+      page: () => ProfileVerificationView(),
+      binding: ProfileVerificationBinding(),
     ),
   ];
 }
