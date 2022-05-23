@@ -182,7 +182,7 @@ class DrawerView extends GetView<SideDrawerController> {
               //payment
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.PAYMENT);
+                  Get.toNamed(Routes.PAYMENT); //todo mange payment
                 },
                 child: Row(
                   children: [
@@ -246,7 +246,6 @@ class DrawerView extends GetView<SideDrawerController> {
                   BottomNavbarController bottomNavbarController = Get.find();
                   bottomNavbarController.index(1);
                   Get.back();
-                  //Get.to(() => const HistoryScreen());
                 },
                 child: Row(
                   children: [
@@ -306,7 +305,6 @@ class DrawerView extends GetView<SideDrawerController> {
                   BottomNavbarController bottomNavbarController = Get.find();
                   bottomNavbarController.index(2);
                   Get.back();
-                  //Get.to(() => const ChatScreen());
                 },
                 child: Row(
                   children: [
@@ -325,32 +323,6 @@ class DrawerView extends GetView<SideDrawerController> {
                       width: 5.w,
                     ),
                     Text('Chat', style: titleTxtStyle)
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
-              //Settings
-              GestureDetector(
-                onTap: () {},
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        'assets/images/setting.png',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text('Settings', style: titleTxtStyle)
                   ],
                 ),
               ),

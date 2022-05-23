@@ -1,10 +1,8 @@
 //import 'package:envo_safe/app/routes/app_pages.dart';
+import 'package:envo_safe/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../widget/app color/app_colors.dart';
 import '../../../widget/constants.dart';
 import '../../carpool/views/carpool_view.dart';
 import '../controllers/account_controller.dart';
@@ -120,7 +118,9 @@ class AccountView extends GetView<AccountController> {
                     ),
                     // Profile Verfication
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.PROFILE_VERIFICATION);
+                      },
                       child: Row(
                         children: [
                           SizedBox(
@@ -136,7 +136,7 @@ class AccountView extends GetView<AccountController> {
                           SizedBox(
                             width: 5.w,
                           ),
-                          Text('Profile Verfication', style: txtStyleN)
+                          Text('Profile Verfication Status', style: txtStyleN)
                         ],
                       ),
                     ),
@@ -146,7 +146,9 @@ class AccountView extends GetView<AccountController> {
 
                     // Payments
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        //todo manage payments
+                      },
                       child: Row(
                         children: [
                           SizedBox(
@@ -173,7 +175,9 @@ class AccountView extends GetView<AccountController> {
 
                     // Refer & Earn
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.REFER_EARN);
+                      },
                       child: Row(
                         children: [
                           SizedBox(
@@ -200,7 +204,9 @@ class AccountView extends GetView<AccountController> {
 
                     // Offers
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        //todo manage Offers
+                      },
                       child: Row(
                         children: [
                           SizedBox(
@@ -220,39 +226,9 @@ class AccountView extends GetView<AccountController> {
                         ],
                       ),
                     ),
-
                     SizedBox(
                       height: 4.h,
-                    ),
-
-                    // Setting
-                    GestureDetector(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          SizedBox(
-                            height: 20,
-                            child: Image.asset(
-                              'assets/images/setting.png',
-                              color: Colors.black,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text('Settings', style: txtStyleN)
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: 4.h,
-                    ),
-
+                    ),                   
                     // Logout
                     GestureDetector(
                       onTap: () {},

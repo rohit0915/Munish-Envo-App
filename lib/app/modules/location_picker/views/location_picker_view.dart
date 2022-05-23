@@ -14,6 +14,7 @@ class LocationPickerView extends GetView<LocationPickerController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: appBarColor,
         automaticallyImplyLeading: true,
         title: Text(
@@ -27,7 +28,9 @@ class LocationPickerView extends GetView<LocationPickerController> {
                 // method to show the search bar
                 controller.openSearch(context);
               },
-              icon: const Icon(Icons.search, color: Colors.black))
+              icon: const Icon(
+                Icons.search,
+              ))
         ],
       ),
       body: SafeArea(
@@ -37,7 +40,7 @@ class LocationPickerView extends GetView<LocationPickerController> {
               () => GoogleMap(
                 zoomControlsEnabled: false,
                 initialCameraPosition: controller.kGooglePlex,
-                onMapCreated: controller.onMapCreated,                
+                onMapCreated: controller.onMapCreated,
                 markers: Set<Marker>.of(controller.allMarkers),
                 onTap: (LatLng latLng) {
                   controller.saveLatLng(latLng: latLng);

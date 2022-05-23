@@ -26,9 +26,7 @@ class MyApp extends StatelessWidget {
         getPages: AppPages.routes,
         theme: ThemeData(
           primaryColor: appBarColor,
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.orange,
-          ),
+          primarySwatch: kPrimarySwatch,          
         ),
       );
     }));

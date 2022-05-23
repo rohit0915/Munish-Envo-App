@@ -1,3 +1,5 @@
+import 'package:envo_safe/app/modules/profile_verification/widgets/not_verified_widget.dart';
+import 'package:envo_safe/app/modules/profile_verification/widgets/verified_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,15 +11,13 @@ class ProfileVerificationView extends GetView<ProfileVerificationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ProfileVerificationView'),
+        foregroundColor: Colors.white,
+        title: Text('Profile Verification Status'),
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'ProfileVerificationView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+          child:
+              controller.isVerified ? VerifiedWidget() : NotVerifiedWidget()),
     );
   }
 }
