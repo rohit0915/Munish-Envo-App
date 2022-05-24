@@ -13,57 +13,15 @@ class PaymentView extends GetView<PaymentController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bckground,
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        title: Text('Payment'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                color: appBarColor,
-                height: 70,
-                width: 415,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(Routes.DRAWER);
-                      },
-                      child: Image.asset(
-                        'assets/images/menu.png',
-                        height: 30,
-                        width: 30,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30.w,
-                    ),
-                    Text(
-                      'PAYMENT ',
-                      style: headingTxtStyle,
-                    ),
-                    SizedBox(
-                      width: 25.w,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          Get.toNamed(Routes.NOTIFICATION);                          
-                        },
-                        icon: const Icon(
-                          Icons.notifications,
-                          color: bgColor,
-                          size: 25,
-                        )),
-                  ],
-                ),
-              ),
-
-              SizedBox(
-                height: 3.h,
-              ),
-
               //link paytm
               Container(
                 height: 80,

@@ -11,7 +11,11 @@ class HistoryView extends GetView<HistoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'HISTORY'),
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        title: Text('History'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

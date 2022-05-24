@@ -1,6 +1,7 @@
 import 'package:envo_safe/app/modules/account/controllers/account_controller.dart';
 import 'package:envo_safe/app/modules/chat/controllers/chat_controller.dart';
 import 'package:envo_safe/app/modules/history/controllers/history_controller.dart';
+import 'package:envo_safe/app/modules/requests/controllers/requests_controller.dart';
 import 'package:get/get.dart';
 
 import '../../carpool/controllers/carpool_controller.dart';
@@ -18,8 +19,8 @@ class BottomNavbarBinding extends Bindings {
      Get.lazyPut<AccountController>(
       () => AccountController(),
     );
-    Get.lazyPut<HistoryController>(
-      () => HistoryController(),
+    Get.lazyPut<RequestsController>(
+      () => RequestsController(),
     );
     Get.lazyPut<ChatController>(
       () => ChatController(),

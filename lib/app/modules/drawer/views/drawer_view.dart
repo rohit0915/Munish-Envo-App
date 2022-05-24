@@ -243,9 +243,7 @@ class DrawerView extends GetView<SideDrawerController> {
               //rides history
               GestureDetector(
                 onTap: () {
-                  BottomNavbarController bottomNavbarController = Get.find();
-                  bottomNavbarController.index(1);
-                  Get.back();
+                  Get.toNamed(Routes.HISTORY);
                 },
                 child: Row(
                   children: [

@@ -113,6 +113,15 @@ class AuthRepo {
     }
   }
 
+  Future<UserDetailsModel> getUserDetailsById({required String id}) async {
+    try {
+      Response r = await ApiClient().dio.get("/users/$id");
+      return userDetailsModelFromJson(jsonEncode(r.data["data"]["user"]));
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   updateUserDetailsApi(
       {required String email,
       required String name,

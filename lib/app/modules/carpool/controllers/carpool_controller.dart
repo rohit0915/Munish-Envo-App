@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:envo_safe/app/data/api_provider/repos/hicker_repo.dart';
+import 'package:envo_safe/app/data/api_provider/repos/hiker_repo.dart';
 import 'package:envo_safe/app/data/api_provider/repos/rider_repo.dart';
 import 'package:envo_safe/app/data/api_provider/repos/vehicle_repo.dart';
 import 'package:envo_safe/app/data/map_provider/repos/directions_repo.dart';
@@ -174,7 +174,7 @@ class CarpoolController extends GetxController with StateMixin {
   }
 
   callAddHikeApi() {
-    HickerRepo hickerRepo = HickerRepo();
+    HikerRepo hickerRepo = HikerRepo();
     hickerRepo.addHikeApi(
         originLatLng: pickUpLocation!,
         destinationLatLng: dropLocation!,
