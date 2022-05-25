@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:envo_safe/app/data/api_provider/api_client.dart';
 import 'package:envo_safe/app/data/models/api_models/user_details_model.dart';
+import 'package:envo_safe/app/modules/profile_verification/controllers/profile_verification_controller.dart';
 import 'package:envo_safe/app/routes/app_pages.dart';
 import 'package:envo_safe/app/widget/common_loader/common_loader.dart';
 import 'package:dio/dio.dart';
@@ -131,9 +132,40 @@ class AuthRepo {
       String imageUrl = await ImageRepo().upload(imagePath: profileImagePath);
       var data = {"email": email, "name": name, "profileImage": imageUrl};
       Response r = await ApiClient().dio.put("/users", data: data);
-      CommonLoader.showSuccessDialog(description: "Details Updated Succesfully");
+      CommonLoader.showSuccessDialog(
+          description: "Details Updated Succesfully");
     } on Exception catch (e) {
       CommonLoader.showErrorDialog(description: e.toString());
+    }
+  }
+
+  Future<void> uploadDocumentsApi(
+      {required String aadhaarImagePath,
+      required String panCardImagePath,
+      required String voterImagePath,
+      required String drivingLicensePath}) async {
+    CommonLoader.showLoading();
+    try {
+      var data = {
+        "aadhaarCard": await ImageRepo().upload(imagePath: aadhaarImagePath),
+        "panCard": await ImageRepo().upload(imagePath: panCardImagePath),
+        "voterCard": await ImageRepo().upload(imagePath: voterImagePath),
+        "drivingLicense": await ImageRepo().upload(imagePath: drivingLicensePath)
+      };
+      Response r = await ApiClient().dio.post("/users/documents", data: data);
+      CommonLoader.showSuccessDialog();
+      g.Get.find<ProfileVerificationController>().callApi();
+    } on Exception catch (e) {
+      CommonLoader.showErrorDialog(description: e.toString());
+    }
+  }
+
+  Future<bool> getProfileVerificationStatus()async {
+    try {
+      Response r = await ApiClient().dio.get("/users/verification-status");
+      return r.data["data"]["verificationStatus"];
+    } on Exception catch (e) {
+      return Future.error(e.toString());
     }
   }
 

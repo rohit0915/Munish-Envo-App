@@ -11,16 +11,16 @@ import '../../../../data/models/api_models/ride_suggestion_model.dart';
 import '../../../../widget/app color/app_colors.dart';
 import '../../../../widget/constants.dart';
 
-class RideSuggestionTile extends GetView<RideSuggestionTileController> {
-  RideSuggestionTile({Key? key, required this.rideSuggestionModel})
-      : super(key: key);
+class RideSuggestionTile extends StatelessWidget {
   final RideSuggestionModel rideSuggestionModel;
+  final RideSuggestionTileController controller;
+  RideSuggestionTile({Key? key, required this.rideSuggestionModel})
+      : controller =
+      Get.put(RideSuggestionTileController(
+    rideSuggestionModel: rideSuggestionModel,
+  ),tag: rideSuggestionModel.rideId);
   @override
   Widget build(BuildContext context) {
-    RideSuggestionTileController rideSuggestionTileController =
-        Get.put(RideSuggestionTileController(
-      rideSuggestionModel: rideSuggestionModel,
-    ));
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
       child: Container(
@@ -83,6 +83,10 @@ class RideSuggestionTile extends GetView<RideSuggestionTileController> {
                                   style: txtStyleS,
                                 ),
                                 Text(
+                                  DateFormat.yMMMd().format(
+                                          rideSuggestionModel.pickupTimestamp) +
+                                      " " +
+                                    
                                   DateFormat.jm().format(
                                     rideSuggestionModel.pickupTimestamp,
                                   ),
@@ -134,9 +138,7 @@ class RideSuggestionTile extends GetView<RideSuggestionTileController> {
                     () => GoogleMap(
                       zoomControlsEnabled: false,
                       initialCameraPosition: controller.kGooglePlex,
-                      onMapCreated: (GoogleMapController con) {
-                        controller.mapController.complete(con);
-                      },
+                      onMapCreated: controller.onMapCreaated,
                       polylines: Set<Polyline>.of(controller.polylines),
                       markers: Set<Marker>.of(controller.allMarkers),
                       gestureRecognizers:
@@ -152,7 +154,6 @@ class RideSuggestionTile extends GetView<RideSuggestionTileController> {
               ElevatedButton(
                   onPressed: () {
                     controller.callSendHikeRequestApi();
-                    
                   },
                   child: Text("Send Request"))
             ],

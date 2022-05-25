@@ -5,6 +5,7 @@ import 'package:envo_safe/app/data/api_provider/repos/vehicle_repo.dart';
 import 'package:envo_safe/app/data/map_provider/repos/directions_repo.dart';
 import 'package:envo_safe/app/data/map_provider/repos/place_repo.dart';
 import 'package:envo_safe/app/data/models/api_models/vehicle_model.dart';
+import 'package:envo_safe/app/modules/requests/controllers/requests_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
@@ -165,20 +166,28 @@ class CarpoolController extends GetxController with StateMixin {
 
   callAddRideApi() {
     RiderRepo riderRepo = RiderRepo();
-    riderRepo.addRideApi(
-        originLatLng: pickUpLocation!,
-        destinationLatLng: dropLocation!,
-        departureDateTime: departureDateTime.value!,
-        userVehicleId: selectedUserVehicle.value!.id,
-        seats: int.parse(seatsRequired.text));
+    riderRepo
+        .addRideApi(
+            originLatLng: pickUpLocation!,
+            destinationLatLng: dropLocation!,
+            departureDateTime: departureDateTime.value!,
+            userVehicleId: selectedUserVehicle.value!.id,
+            seats: int.parse(seatsRequired.text))
+        .then((value) {
+      Get.find<RequestsController>().callGetApis();
+    });
   }
 
   callAddHikeApi() {
     HikerRepo hickerRepo = HikerRepo();
-    hickerRepo.addHikeApi(
-        originLatLng: pickUpLocation!,
-        destinationLatLng: dropLocation!,
-        departureDateTime: departureDateTime.value!,
-        seats: int.parse(seatsRequired.text));
+    hickerRepo
+        .addHikeApi(
+            originLatLng: pickUpLocation!,
+            destinationLatLng: dropLocation!,
+            departureDateTime: departureDateTime.value!,
+            seats: int.parse(seatsRequired.text))
+        .then((value) {
+      Get.find<RequestsController>().callGetApis();
+    });
   }
 }

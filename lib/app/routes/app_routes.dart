@@ -27,6 +27,7 @@ abstract class Routes {
   static const MANAGE_PROFILE = _Paths.MANAGE_PROFILE;
   static const PROFILE_VERIFICATION = _Paths.PROFILE_VERIFICATION;
   static const REQUESTS = _Paths.REQUESTS;
+  static const REQUESTS_ON_RIDE = _Paths.REQUESTS_ON_RIDE;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const MANAGE_PROFILE = '/manage-profile';
   static const PROFILE_VERIFICATION = '/profile-verification';
   static const REQUESTS = '/requests';
+  static const REQUESTS_ON_RIDE = '/requests-on-ride';
 }

@@ -1,23 +1,18 @@
 import 'dart:async';
-
-import 'package:envo_safe/app/data/api_provider/repos/auth_repo.dart';
 import 'package:envo_safe/app/data/api_provider/repos/hiker_repo.dart';
-import 'package:envo_safe/app/data/models/api_models/ride_suggestion_model.dart';
-import 'package:envo_safe/app/data/models/api_models/user_details_model.dart';
-import 'package:envo_safe/app/modules/matching_rider/controllers/matching_rider_controller.dart';
-import 'package:envo_safe/app/modules/requests/controllers/requests_controller.dart';
+import 'package:envo_safe/app/data/models/api_models/hike_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../../../data/api_provider/repos/auth_repo.dart';
 import '../../../../../data/map_provider/repos/directions_repo.dart';
+import '../../../../../data/models/api_models/user_details_model.dart';
 
-class RideSuggestionTileController extends GetxController
-    with StateMixin<UserDetailsModel> {
-  RideSuggestionTileController({required this.rideSuggestionModel});
-  RideSuggestionModel rideSuggestionModel;
+class HikesWidgetController extends GetxController {
+  HikesWidgetController({required this.hikesModel});
+  HikesModel hikesModel;
   RxList<Marker> allMarkers = <Marker>[].obs;
   RxList<Polyline> polylines = <Polyline>[].obs;
   final CameraPosition kGooglePlex = CameraPosition(
@@ -26,48 +21,20 @@ class RideSuggestionTileController extends GetxController
   );
   Completer<GoogleMapController> mapController = Completer();
 
-  @override
-  void onInit() {
-    callGetUserDetailsById();
-    super.onInit();
-  }
-
-  onMapCreaated(GoogleMapController con) {
+  onMapCreated(GoogleMapController con) {
     mapController.complete(con);
     _loadGoogleMap();
   }
 
-  callGetUserDetailsById() {
-    AuthRepo authRepo = AuthRepo();
-    authRepo.getUserDetailsById(id: rideSuggestionModel.riderId).then((value) {
-      change(value, status: RxStatus.success());      
-    }, onError: (err) {
-      change(value, status: RxStatus.error(err.toString()));
-    });
-  }
-
-  callSendHikeRequestApi() async {
-    HikerRepo hikerRepo = HikerRepo();
-    MatchingRiderController matchingRiderController = Get.find();
-    hikerRepo
-        .addHikeRequest(
-            rideId: rideSuggestionModel.rideId,
-            hikeId: matchingRiderController.hikeId)
-        .then((_) {
-      RequestsController requestsController = Get.find();
-      requestsController.callGetApis();
-    });
-  }
-
   _loadGoogleMap() async {
-    var originLatLng = LatLng(rideSuggestionModel.hikerOrigin.lat,
-        rideSuggestionModel.hikerOrigin.lng);
-    var pickupLatLng = LatLng(rideSuggestionModel.pickupPoint.lat,
-        rideSuggestionModel.pickupPoint.lng);
-    var dropLatLng = LatLng(
-        rideSuggestionModel.dropPoint.lat, rideSuggestionModel.dropPoint.lng);
-    var destLatLng = LatLng(rideSuggestionModel.hikerDestination.lat,
-        rideSuggestionModel.hikerDestination.lng);
+    var originLatLng = LatLng(hikesModel.hike.originLocation.coordinates[1],
+        hikesModel.hike.originLocation.coordinates[0]);
+    var pickupLatLng = LatLng(hikesModel.pickupLocation.coordinates[1],
+        hikesModel.pickupLocation.coordinates[0]);
+    var dropLatLng = LatLng(hikesModel.dropLocation.coordinates[1],
+        hikesModel.dropLocation.coordinates[0]);
+    var destLatLng = LatLng(hikesModel.hike.destinationLocation.coordinates[1],
+        hikesModel.hike.destinationLocation.coordinates[0]);
     _addMarker(latLng: originLatLng, title: "Origin");
     _addMarker(latLng: pickupLatLng, title: "Pickup");
     _addPolyLine(
@@ -112,5 +79,15 @@ class RideSuggestionTileController extends GetxController
       }
       polylines.refresh();
     });
+  }
+
+  callHikeCheckInApi() {
+    HikerRepo hikerRepo = HikerRepo();
+    hikerRepo.hikeCheckIn(hikeRequestId: hikesModel.id);
+  }
+
+  callHikeCheckOut() {
+    HikerRepo hikerRepo = HikerRepo();
+    hikerRepo.hikeCheckOut(hikeRequestId: hikesModel.id);
   }
 }

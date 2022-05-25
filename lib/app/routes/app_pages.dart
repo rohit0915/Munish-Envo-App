@@ -39,6 +39,8 @@ import 'package:envo_safe/app/modules/refer_earn/bindings/refer_earn_binding.dar
 import 'package:envo_safe/app/modules/refer_earn/views/refer_earn_view.dart';
 import 'package:envo_safe/app/modules/requests/bindings/requests_binding.dart';
 import 'package:envo_safe/app/modules/requests/views/requests_view.dart';
+import 'package:envo_safe/app/modules/requests_on_ride/bindings/requests_on_ride_binding.dart';
+import 'package:envo_safe/app/modules/requests_on_ride/views/requests_on_ride_view.dart';
 import 'package:envo_safe/app/modules/riders_pledge/bindings/riders_pledge_binding.dart';
 import 'package:envo_safe/app/modules/riders_pledge/views/riders_pledge_view.dart';
 import 'package:envo_safe/app/modules/set_office_home_location/bindings/set_office_home_location_binding.dart';
@@ -177,6 +179,11 @@ class AppPages {
       name: _Paths.REQUESTS,
       page: () => RequestsView(),
       binding: RequestsBinding(),
+    ),
+    GetPage(
+      name: _Paths.REQUESTS_ON_RIDE,
+      page: () => RequestsOnRideView(),
+      binding: RequestsOnRideBinding(),
     ),
   ];
 }

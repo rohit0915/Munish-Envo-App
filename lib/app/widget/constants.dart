@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'app%20color/app_colors.dart';
@@ -41,3 +39,15 @@ TextStyle txtStyleS = const TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.w400,
 );
+
+const String created = "created";
+const String booked = "booked";
+const String ongoing = "ongoing";
+const String completed = "completed";
+const String cancelled = "cancelled";
+const String expired = "expired";
+const String requested = "requested";
+const String accepted = "accepted";
+const String autoRejected = "auto_rejected";
+const String suggested = "suggested";
+

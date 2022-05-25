@@ -15,9 +15,11 @@ class ProfileVerificationView extends GetView<ProfileVerificationController> {
         title: Text('Profile Verification Status'),
         centerTitle: true,
       ),
-      body: Center(
-          child:
-              controller.isVerified ? VerifiedWidget() : NotVerifiedWidget()),
+      body: controller.obx(
+        (state)=> Center(
+            child:
+                state! ? VerifiedWidget() : NotVerifiedWidget()),
+      ),
     );
   }
 }

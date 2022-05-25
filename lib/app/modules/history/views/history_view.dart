@@ -5,6 +5,8 @@ import 'package:sizer/sizer.dart';
 import '../../../widget/app color/app_colors.dart';
 import '../../../widget/constants.dart';
 import '../../carpool/views/carpool_view.dart';
+import '../../requests/widgets/hikes_widget/hikes_widget.dart';
+import '../../requests/widgets/rides_widget/rides_widget.dart';
 import '../controllers/history_controller.dart';
 
 class HistoryView extends GetView<HistoryController> {
@@ -16,156 +18,62 @@ class HistoryView extends GetView<HistoryController> {
         title: Text('History'),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 3.h,
-              ),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
+      body: controller.obx(
+        (_) => SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (controller.rides.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 1.h),
+                        child: Text(
+                          "Pools Offered",
+                          style: TextStyle(fontSize: 15.sp),
+                        ),
+                      ),
+                      ListView.builder(
+                        itemCount: controller.rides.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              if (controller.rides[index].status == created) {
+                                Get.toNamed(Routes.REQUESTS_ON_RIDE,
+                                    arguments: controller.rides[index].id);
+                              }
+                            },
+                            child: RidesWidget(
+                                ridesModel: controller.rides[index])),
+                      ),
+                    ],
                   ),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'All',
-                          style: txtStyleN,
-                        ),
-                        const Icon(Icons.filter_list_outlined),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: () {
-                        //Get.to(() => const RequestCancel());
-                        Get.toNamed(Routes.CANCEL_REQUEST);
-                      },
-                      child: SizedBox(
-                        height: 100,
-                        child: Card(
-                          elevation: 5,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              CircleAvatar(
-                                radius: 25,
-                                child: Image.asset(
-                                  'assets/images/driver.png',
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'New Delhi ----- Noida',
-                                    style: titleTxtStyle,
-                                  ),
-                                  Text(
-                                    'Tue,20/12/2021,04:00 PM',
-                                    style: txtStyleG,
-                                  ),
-                                  Text(
-                                    'Load Total Amount: ₹ xxx.xx',
-                                    style: txtStyleG,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              Container(
-                                  height: 35,
-                                  width: 80,
-                                  alignment: Alignment.center,
-                                  decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0)),
-                                      color: Colors.redAccent),
-                                  child: const Text(
-                                    'Cancelled',
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )),
-                            ],
-                          ),
+                if (controller.hikes.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 1.h),
+                        child: Text(
+                          "Pools Requested",
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    SizedBox(
-                      height: 100,
-                      child: Card(
-                        elevation: 5,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 2.w,
-                            ),
-                            CircleAvatar(
-                              radius: 25,
-                              child: Image.asset(
-                                'assets/images/driver.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 2.w,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'New Delhi ----- Noida',
-                                  style: titleTxtStyle,
-                                ),
-                                Text(
-                                  'Tue,20/12/2021,04:00 PM',
-                                  style: txtStyleG,
-                                ),
-                                Text(
-                                  'Load Total Amount: ₹ xxx.xx',
-                                  style: txtStyleG,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 15.w,
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: borderblack,
-                              size: 25,
-                            )
-                          ],
-                        ),
+                      ListView.builder(
+                        itemCount: controller.hikes.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) =>
+                            HikesWidget(hikesModel: controller.hikes[index]),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+              ],
+            ),
           ),
         ),
       ),
