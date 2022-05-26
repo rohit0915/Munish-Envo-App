@@ -28,6 +28,7 @@ abstract class Routes {
   static const PROFILE_VERIFICATION = _Paths.PROFILE_VERIFICATION;
   static const REQUESTS = _Paths.REQUESTS;
   static const REQUESTS_ON_RIDE = _Paths.REQUESTS_ON_RIDE;
+  static const CHATING = _Paths.CHATING;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const PROFILE_VERIFICATION = '/profile-verification';
   static const REQUESTS = '/requests';
   static const REQUESTS_ON_RIDE = '/requests-on-ride';
+  static const CHATING = '/chating';
 }

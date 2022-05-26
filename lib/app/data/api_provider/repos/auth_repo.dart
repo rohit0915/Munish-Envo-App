@@ -153,7 +153,7 @@ class AuthRepo {
         "drivingLicense":
             await ImageRepo().upload(imagePath: drivingLicensePath)
       };
-      Response r = await ApiClient().dio.post("/users/documents", data: data);
+      Response r = await ApiClient().dio.put("/users/documents", data: data);
       CommonLoader.showSuccessDialog(description: "Documents Uploaded");
       g.Get.find<ProfileVerificationController>().callGetStatusApi();
     } on Exception catch (e) {

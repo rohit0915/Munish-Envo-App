@@ -1,3 +1,4 @@
+import 'package:envo_safe/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -11,53 +12,69 @@ class ChatView extends GetView<ChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: 'CHAT'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 35,
-                    backgroundColor: bgColor,
-                    child: CircleAvatar(
-                      radius: 30,
-                      child: Image.asset('assets/images/profile.png'),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.callGetChatListApi();
+        },
+        child: controller.obx(
+            (state) => ListView.builder(
+                  itemCount: state!.chats.length,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.CHATING,arguments: [state.chats[index].firstUser.id != state.userId
+                                  ? state.chats[index].firstUser.id
+                                  : state.chats[index].secondUser.id,state.chats[index].messages]);//sending chater user id
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 20.w,
+                                height: 20.w,
+                                child: ClipOval(
+                                  child: Image.network(
+                                    state.chats[index].firstUser.id !=
+                                            state.userId
+                                        ? state
+                                            .chats[index].firstUser.profileImage
+                                        : state.chats[index].secondUser
+                                            .profileImage,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(
+                                                'assets/images/profile.png'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      state.chats[index].firstUser.id !=
+                                              state.userId
+                                          ? state.chats[index].firstUser.name
+                                          : state.chats[index].secondUser.name,
+                                      style: titleTxtStyle),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(
+                          color: appBarColor,
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    width: 2.w,
-                  ),
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Jack Jordon', style: titleTxtStyle),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Text('Lorem Ipsum', style: txtStyleG)
-                    ],
-                  ),
-
-                  // Obx(() => Text(
-                  //   "12:00 P.M"
-                  //   // DateFormat.jm().format( )
-                  //   ,
-                  //   style: TextStyle(
-                  //       fontSize: 13.sp,
-                  //        ),
-                  // )),
-                ],
-              ),
-            ),
-            const Divider(
-              color: appBarColor,
-            )
-          ],
-        ),
+                ),
+            onEmpty: Text("No Active Chats")),
       ),
     );
   }

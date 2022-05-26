@@ -149,32 +149,6 @@ class DrawerView extends GetView<SideDrawerController> {
                 height: 3.h,
               ),
 
-              //My Rides
-              GestureDetector(
-                onTap: () {
-                  //todo set it up Get.to(() => const MyRides());
-                },
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        'assets/images/rides.png',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text('My Rides', style: titleTxtStyle)
-                  ],
-                ),
-              ),
-
               SizedBox(
                 height: 3.h,
               ),
@@ -182,7 +156,7 @@ class DrawerView extends GetView<SideDrawerController> {
               //payment
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.PAYMENT); //todo mange payment
+                  Get.toNamed(Routes.PAYMENT);
                 },
                 child: Row(
                   children: [

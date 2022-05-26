@@ -147,7 +147,7 @@ class AccountView extends GetView<AccountController> {
                     // Payments
                     GestureDetector(
                       onTap: () {
-                        //todo manage payments
+                        Get.toNamed(Routes.PAYMENT);
                       },
                       child: Row(
                         children: [
@@ -202,7 +202,7 @@ class AccountView extends GetView<AccountController> {
                       height: 4.h,
                     ),
 
-                    // Offers
+                    /*  // Offers
                     GestureDetector(
                       onTap: () {
                         //todo manage Offers
@@ -225,10 +225,7 @@ class AccountView extends GetView<AccountController> {
                           Text('Offers', style: txtStyleN)
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),                   
+                    ), */
                     // Logout
                     GestureDetector(
                       onTap: () {},

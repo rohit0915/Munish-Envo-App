@@ -99,6 +99,18 @@ class NotVerifiedWidget extends GetView<ProfileVerificationController> {
         ),
         ElevatedButton(
             onPressed: () {
+              if (controller.aadharImage.value.path == "") {
+                return;
+              }
+              if (controller.voterImage.value.path == "") {
+                return;
+              }
+              if (controller.panImage.value.path == "") {
+                return;
+              }
+              if (controller.dlImage.value.path == "") {
+                return;
+              }
               controller.callUploadDocument();
             },
             child: Text("Submit"))

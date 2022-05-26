@@ -13,6 +13,8 @@ import 'package:envo_safe/app/modules/carpool/bindings/carpool_binding.dart';
 import 'package:envo_safe/app/modules/carpool/views/carpool_view.dart';
 import 'package:envo_safe/app/modules/chat/bindings/chat_binding.dart';
 import 'package:envo_safe/app/modules/chat/views/chat_view.dart';
+import 'package:envo_safe/app/modules/chating/bindings/chating_binding.dart';
+import 'package:envo_safe/app/modules/chating/views/chating_view.dart';
 import 'package:envo_safe/app/modules/drawer/bindings/drawer_binding.dart';
 import 'package:envo_safe/app/modules/drawer/views/drawer_view.dart';
 import 'package:envo_safe/app/modules/help_support/bindings/help_support_binding.dart';
@@ -184,6 +186,11 @@ class AppPages {
       name: _Paths.REQUESTS_ON_RIDE,
       page: () => RequestsOnRideView(),
       binding: RequestsOnRideBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHATING,
+      page: () => ChatingView(),
+      binding: ChatingBinding(),
     ),
   ];
 }
