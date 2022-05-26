@@ -150,20 +150,21 @@ class AuthRepo {
         "aadhaarCard": await ImageRepo().upload(imagePath: aadhaarImagePath),
         "panCard": await ImageRepo().upload(imagePath: panCardImagePath),
         "voterCard": await ImageRepo().upload(imagePath: voterImagePath),
-        "drivingLicense": await ImageRepo().upload(imagePath: drivingLicensePath)
+        "drivingLicense":
+            await ImageRepo().upload(imagePath: drivingLicensePath)
       };
       Response r = await ApiClient().dio.post("/users/documents", data: data);
-      CommonLoader.showSuccessDialog();
-      g.Get.find<ProfileVerificationController>().callApi();
+      CommonLoader.showSuccessDialog(description: "Documents Uploaded");
+      g.Get.find<ProfileVerificationController>().callGetStatusApi();
     } on Exception catch (e) {
       CommonLoader.showErrorDialog(description: e.toString());
     }
   }
 
-  Future<bool> getProfileVerificationStatus()async {
+  Future<bool> getProfileVerificationStatus() async {
     try {
       Response r = await ApiClient().dio.get("/users/verification-status");
-      return r.data["data"]["verificationStatus"];
+      return r.data["data"]["status"];
     } on Exception catch (e) {
       return Future.error(e.toString());
     }

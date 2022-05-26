@@ -1,7 +1,9 @@
+import 'package:envo_safe/app/modules/profile_verification/controllers/profile_verification_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class NotVerifiedWidget extends StatelessWidget {
+class NotVerifiedWidget extends GetView<ProfileVerificationController> {
   const NotVerifiedWidget({Key? key}) : super(key: key);
 
   @override
@@ -15,12 +17,12 @@ class NotVerifiedWidget extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: Padding(
-            padding: EdgeInsets.all(30.sp),
+            padding: EdgeInsets.all(15.sp),
             child: Text(
               "!",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 50.sp,
+                fontSize: 20.sp,
               ),
             ),
           ),
@@ -28,10 +30,78 @@ class NotVerifiedWidget extends StatelessWidget {
         SizedBox(
           height: 2.h,
         ),
-        Text(
-          "Profile Not Verfied".toUpperCase(),
-          style: TextStyle(fontSize: 25.sp),
-        )
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 1.h),
+          child: Text(
+            "Profile Not Verfied".toUpperCase(),
+            style: TextStyle(fontSize: 15.sp),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            controller.pickImage(controller.aadharImage);
+          },
+          leading: Icon(Icons.image),
+          title: Text("Upload Aadhaar"),
+          trailing: Obx(
+            () => controller.aadharImage.value.path == ""
+                ? Icon(Icons.chevron_right)
+                : Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            controller.pickImage(controller.voterImage);
+          },
+          leading: Icon(Icons.image),
+          title: Text("Upload Voter Id"),
+          trailing: Obx(
+            () => controller.voterImage.value.path == ""
+                ? Icon(Icons.chevron_right)
+                : Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            controller.pickImage(controller.panImage);
+          },
+          leading: Icon(Icons.image),
+          title: Text("Upload Pan Card"),
+          trailing: Obx(
+            () => controller.panImage.value.path == ""
+                ? Icon(Icons.chevron_right)
+                : Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            controller.pickImage(controller.dlImage);
+          },
+          leading: Icon(Icons.image),
+          title: Text("Upload Driving License"),
+          trailing: Obx(
+            () => controller.dlImage.value.path == ""
+                ? Icon(Icons.chevron_right)
+                : Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+          ),
+        ),
+        ElevatedButton(
+            onPressed: () {
+              controller.callUploadDocument();
+            },
+            child: Text("Submit"))
       ],
     );
   }
