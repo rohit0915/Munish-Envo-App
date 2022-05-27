@@ -23,7 +23,11 @@ class ChatView extends GetView<ChatController> {
                     onTap: () {
                       Get.toNamed(Routes.CHATING,arguments: [state.chats[index].firstUser.id != state.userId
                                   ? state.chats[index].firstUser.id
-                                  : state.chats[index].secondUser.id,state.chats[index].messages]);//sending chater user id
+                                  : state.chats[index].secondUser.id,state.chats[index].messages,
+                                  state.chats[index].firstUser.id == state.userId
+                            ? state.chats[index].firstUser.id
+                            : state.chats[index].secondUser.id
+                                  ]);//sending chater user id
                     },
                     child: Column(
                       children: [

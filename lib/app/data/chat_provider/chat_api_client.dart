@@ -6,7 +6,8 @@ class ChatApiClient {
   Dio dio = _init();
   static _init() {
     Dio _dio = Dio(BaseOptions(
-        baseUrl: "http://685e-103-117-14-176.ngrok.io",
+        baseUrl:
+            ApiClient.baseUrl,
         connectTimeout: 20000, //15 secs
         receiveTimeout: 20000,
         sendTimeout: 20000));

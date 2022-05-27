@@ -5,9 +5,10 @@ import 'exeptions/exceptions.dart';
 
 class ApiClient {
   Dio dio = _init();
+  static String baseUrl = "http://mern.online:5008"; //todo change this
   static _init() {
     Dio _dio = Dio(BaseOptions(
-        baseUrl: "https://envo-safe.herokuapp.com",
+        baseUrl: baseUrl,
         connectTimeout: 20000, //15 secs
         receiveTimeout: 20000,
         sendTimeout: 20000));
@@ -40,7 +41,9 @@ class ApiInterceptor extends Interceptor {
       case DioErrorType.response:
         switch (err.response!.statusCode) {
           case 400:
-            throw BadRequestException(requestOptions: err.requestOptions,msg: err.response!.data["error"]);
+            throw BadRequestException(
+                requestOptions: err.requestOptions,
+                msg: err.response!.data["error"]);
           case 401:
             throw UnauthorizedException(requestOptions: err.requestOptions);
           case 404:

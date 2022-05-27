@@ -41,7 +41,7 @@ class HikesModel {
   Hiker rider;
   String status;
   DateTime updatedAt;
-  int fare;
+  num fare;
 
   factory HikesModel.fromJson(Map<String, dynamic> json) => HikesModel(
         id: json["id"],

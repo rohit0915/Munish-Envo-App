@@ -14,123 +14,50 @@ class NotificationView extends GetView<NotificationController> {
       appBar: AppBar(
         title: Text(
           'Notifications',
-          style: titleTxtStyle,
         ),
-        backgroundColor: bgColor,
-        leading: IconButton(
-            color: borderblack,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-              size: 20,
-            )),
+        centerTitle: true,
+        foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            SizedBox(
-              height: 3.h,
-            ),
-            const ListTile(
-              title: Text(
-                  "You have booked lorem studio for 23/10/2021 and the time being scheduled is 11:00 AM.",
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    color: borderblack,
-                    fontWeight: FontWeight.w400,
-                  )),
-              leading: Icon(
-                Icons.mail,
-                color: Colors.blueAccent,
-                size: 50,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.callGetNotificationApi();
+        },
+        child: controller.obx(
+          (state) => Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: ListView.builder(
+              itemCount: state!.notifications.length,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  ListTile(
+                    title: Text(state.notifications[index].notification,
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          color: borderblack,
+                          fontWeight: FontWeight.w400,
+                        )),
+                    leading: Icon(
+                      Icons.mail,
+                      color: Colors.blueAccent,
+                      size: 50,
+                    ),
+                    //subtitle: Text("Province"),
+                    //trailing: Icon(Icons.more_vert),
+                  ),
+                  const Divider(
+                    thickness: 2,
+                    endIndent: 1,
+                    indent: 1,
+                  ),
+                ],
               ),
-              //subtitle: Text("Province"),
-              trailing: Icon(Icons.more_vert),
             ),
-            const Divider(
-              thickness: 2,
-              endIndent: 1,
-              indent: 1,
-            ),
-            SizedBox(
-              height: 3.h,
-            ),
-            const ListTile(
-              title: Text(
-                  "You have booked lorem studio for 23/10/2021 and the time being scheduled is 11:00 AM.",
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    color: borderblack,
-                    fontWeight: FontWeight.w400,
-                  )),
-              leading: Icon(
-                Icons.mail,
-                color: Colors.blueAccent,
-                size: 50,
-              ),
-              //subtitle: Text("Province"),
-              trailing: Icon(Icons.more_vert),
-            ),
-            const Divider(
-              thickness: 3,
-              endIndent: 1,
-              indent: 1,
-            ),
-            const ListTile(
-              title: Text(
-                  "You have booked lorem studio for 23/10/2021 and the time being scheduled is 11:00 AM.",
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    color: borderblack,
-                    fontWeight: FontWeight.w400,
-                  )),
-              leading: Icon(
-                Icons.mail,
-                color: Colors.blueAccent,
-                size: 50,
-              ),
-              //subtitle: Text("Province"),
-              trailing: Icon(Icons.more_vert),
-            ),
-            const Divider(
-              thickness: 2,
-              endIndent: 1,
-              indent: 1,
-            ),
-            SizedBox(
-              height: 3.h,
-            ),
-            const ListTile(
-              title: Text(
-                  "You have booked lorem studio for 23/10/2021 and the time being scheduled is 11:00 AM.",
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    color: borderblack,
-                    fontWeight: FontWeight.w400,
-                  )),
-              leading: Icon(
-                Icons.mail,
-                color: Colors.blueAccent,
-                size: 50,
-              ),
-              //subtitle: Text("Province"),
-              trailing: Icon(Icons.more_vert),
-            ),
-            const Divider(
-              thickness: 2,
-              endIndent: 1,
-              indent: 1,
-            ),
-          ],
+          ),
         ),
       ),
     );
-  
   }
 }

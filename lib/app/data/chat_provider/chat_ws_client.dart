@@ -1,9 +1,9 @@
+import 'package:envo_safe/app/data/api_provider/api_client.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class ChatWsClient {
-  Socket socket = init();
-  static String baseUrl = "http://685e-103-117-14-176.ngrok.io";
+  Socket socket = init();  
   static init() {
-    return io(baseUrl);
+    return io(ApiClient.baseUrl);
   }
 }

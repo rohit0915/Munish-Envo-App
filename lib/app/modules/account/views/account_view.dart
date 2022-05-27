@@ -204,8 +204,7 @@ class AccountView extends GetView<AccountController> {
 
                     /*  // Offers
                     GestureDetector(
-                      onTap: () {
-                        //todo manage Offers
+                      onTap: () {                        
                       },
                       child: Row(
                         children: [
